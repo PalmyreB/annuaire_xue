@@ -1,0 +1,35 @@
+{% extends 'entrees/base.html' %}
+{% load django_tables2 %}
+{% load material_form %}
+
+{% block subtitle %}{% if field %}{{ field }}{% else %}Tous les contacts{% endif %}{% endblock %}
+
+{% block content %}
+{% if field %}<h1>{{ field }}</h1>{% endif %}
+
+{% block left-panel %}
+<div class="left-panel">
+    <div class="card">
+        <div class="card-content">
+            {% render_table table 'django_tables2/bootstrap.html' %}
+        </div>
+    </div>
+</div>
+{% endblock left-panel %}
+
+{% if filter %}
+{% block right-panel %}
+<div class="right-panel">
+    <div class="card">
+        <div class="card-content">
+            <form action="" method="get" class="form form-inline">
+                {% form form=filter.form %}{% endform %}
+                <input type="submit" value="Filtrer" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock right-panel %}
+{% endif %}
+{% endblock %}

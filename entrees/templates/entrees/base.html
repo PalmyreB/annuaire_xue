@@ -1,0 +1,28 @@
+{% extends 'material/frontend/base_site.html' %}
+
+{% block title %}Annuaire X-UE – {% block subtitle %}{% endblock %}{% endblock %}
+{% block page_title %}Annuaire X-UE{% endblock %}
+
+{% block sidenav_items %}
+<p>
+<ul>
+    <li><a href="{% url 'entrees:index' %}">Accueil</a></li>
+    <li><a href="{% url 'entrees:contacts' %}">Tous les contacts</a></li>
+    <li><a href="{% url 'entrees:new-contact-form' %}">Formulaire</a></li>
+</ul>
+</p>
+{% if field_list %}
+<span class="subheader">Domaines de compétence</span>
+<p>
+<ul>
+    {% for field in field_list %}
+    <li {% if forloop.last %}class="last" {% endif %}>
+        <a href="{% url 'entrees:field' field.slug %}" class="collapsible-header" data-turbolinks="false">
+            {{ field.name }}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+</p>
+{% endif %}
+{% endblock %}

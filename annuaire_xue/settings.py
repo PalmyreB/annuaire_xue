@@ -35,12 +35,18 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "entrees.apps.EntreesConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_filters",
+    "django_tables2",
+    "material.theme.teal",
+    "material",
+    "material.frontend",
 ]
 
 MIDDLEWARE = [
