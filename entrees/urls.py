@@ -17,5 +17,5 @@ urlpatterns = [
     ),
     path("field/<str:field_slug>/", views.FieldView.as_view(), name="field"),
     path("form/", views.send_contacts, name="new-contact-form"),
-    path("contacts/", views.AllContactsView.as_view(), name="contacts"),
+    path("contacts/", views.FieldView.as_view(), name="contacts"),
 ]

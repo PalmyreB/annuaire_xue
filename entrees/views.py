@@ -82,7 +82,9 @@ def send_contacts(request):
     return render(request, "entrees/form.html", {"form": form, "formset": formset})
 
 
-class SimpleTable(tables.Table):
+class RecommendedContactsTable(tables.Table):
+    fields = tables.ManyToManyColumn(transform=lambda field: field.name)
+
     class Meta:
         model = RecommendedContact
 
@@ -96,17 +98,23 @@ class AllContactsView(tables.SingleTableView):
 class FieldFilter(django_filters.FilterSet):
     class Meta:
         model = RecommendedContact
-        fields = ["firstname", "lastname"]
+        fields = ["firstname", "lastname", "fields"]
 
 
 class FieldView(SingleTableMixin, FilterView):
-    table_class = SimpleTable
+    """
+    Table view of recommended contacts with filters
+
+    On the page of a specific field, only the queryset of contacts having this field is shown.
+    """
+
+    table_class = RecommendedContactsTable
     model = RecommendedContact
     template_name = "entrees/table.html"
     filterset_class = FieldFilter
-    # def get(self, request, *args, **kwargs):
-    #     field_slug = kwargs["field_slug"]
-    #     field = get_object_or_404(Field, slug=field_slug)
-    #     # self.queryset = RecommendedContact.objects.filter(fields__in=[field])
-    #     self.queryset = RecommendedContact.objects.all()
-    #     return render(request, self.template_name, {"field": field})
+
+    def get_queryset(self):
+        if "field_slug" in self.kwargs:
+            return RecommendedContact.objects.filter(
+                fields__slug=self.kwargs["field_slug"]
+            )
