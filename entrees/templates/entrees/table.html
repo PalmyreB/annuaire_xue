@@ -2,15 +2,18 @@
 {% load django_tables2 %}
 {% load material_form %}
 
-{% block subtitle %}{% if field %}{{ field }}{% else %}Tous les contacts{% endif %}{% endblock %}
+{% block subtitle %}
+{% if field_of_competence %}{{ field_of_competence }}
+{% else %}Tous les contacts{% endif %}
+{% endblock %}
 
 {% block content %}
-{% if field %}<h1>{{ field }}</h1>{% endif %}
 
 {% block left-panel %}
 <div class="left-panel">
     <div class="card">
         <div class="card-content">
+            {% if field_of_competence %}<h1 class="card-title">{{ field_of_competence }}</h1>{% endif %}
             {% render_table table 'django_tables2/bootstrap.html' %}
         </div>
     </div>

@@ -16,10 +16,10 @@
 <span class="subheader">{% translate "Domaines de compétence" %}</span>
 <p>
 <ul>
-    {% for field in field_list %}
+    {% for field_of_competence in field_list %}
     <li {% if forloop.last %}class="last" {% endif %}>
-        <a href="{% url 'entrees:field' field.slug %}" class="collapsible-header" data-turbolinks="false">
-            {{ field.name }}
+        <a href="{% url 'entrees:field-of-competence' field_of_competence.slug %}" class="collapsible-header" data-turbolinks="false">
+            {{ field_of_competence.name }}
         </a>
     </li>
     {% endfor %}

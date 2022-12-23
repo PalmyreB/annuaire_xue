@@ -9,14 +9,14 @@ from django_filters.views import FilterView
 from django_tables2.views import SingleTableMixin
 
 from .forms import RecommendedContactFormset, ReferentContactForm
-from .models import Field, RecommendedContact, ReferentContact
+from .models import FieldOfCompetence, RecommendedContact, ReferentContact
 
 
 def index(request):
     latest_referent_contact_list = ReferentContact.objects.order_by(
         "-registration_date"
     )[:5]
-    field_list = Field.objects.all()
+    field_list = FieldOfCompetence.objects.all()
     context = {
         "latest_referent_contact_list": latest_referent_contact_list,
         "field_list": field_list,
@@ -62,7 +62,9 @@ def send_contacts(request):
             for current_form in formset:
                 recommended_contact_data = current_form.cleaned_data
                 # Manage many-to-many relationships
-                fields = recommended_contact_data.pop("fields", [])
+                fields_of_competence = recommended_contact_data.pop(
+                    "fields_of_competence", []
+                )
                 # Manage additional fields
                 recommended_contact_data.pop("has_approved", None)
                 recommended_contact_data.pop("has_informed", None)
@@ -70,7 +72,7 @@ def send_contacts(request):
                 recommended_contact_data["referent_contact"] = referent_contact
                 recommended_contact = RecommendedContact(**recommended_contact_data)
                 recommended_contact.save()
-                recommended_contact.fields.set(fields)
+                recommended_contact.fields_of_competence.set(fields_of_competence)
 
             # redirect to a new URL:
             return HttpResponseRedirect(reverse("entrees:index"))
@@ -84,7 +86,9 @@ def send_contacts(request):
 
 
 class RecommendedContactsTable(tables.Table):
-    fields = tables.ManyToManyColumn(transform=lambda field: field.name)
+    fields_of_competence = tables.ManyToManyColumn(
+        transform=lambda field_of_competence: field_of_competence.name
+    )
 
     class Meta:
         model = RecommendedContact
@@ -96,13 +100,13 @@ class AllContactsView(tables.SingleTableView):
     template_name = "entrees/table.html"
 
 
-class FieldFilter(django_filters.FilterSet):
+class FieldOfCompetenceFilter(django_filters.FilterSet):
     class Meta:
         model = RecommendedContact
-        fields = ["firstname", "lastname", "fields"]
+        fields = ["firstname", "lastname", "fields_of_competence"]
 
 
-class FieldView(SingleTableMixin, FilterView):
+class FieldOfCompetenceView(SingleTableMixin, FilterView):
     """
     Table view of recommended contacts with filters
 
@@ -112,10 +116,10 @@ class FieldView(SingleTableMixin, FilterView):
     table_class = RecommendedContactsTable
     model = RecommendedContact
     template_name = "entrees/table.html"
-    filterset_class = FieldFilter
+    filterset_class = FieldOfCompetenceFilter
 
     def get_queryset(self):
-        if "field_slug" in self.kwargs:
+        if "field_of_competence_slug" in self.kwargs:
             return RecommendedContact.objects.filter(
-                fields__slug=self.kwargs["field_slug"]
+                fields_of_competence__slug=self.kwargs["field_of_competence_slug"]
             )

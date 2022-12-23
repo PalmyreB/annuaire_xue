@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name="Field",
+            name="FieldOfCompetence",
             fields=[
                 (
                     "id",
@@ -115,7 +115,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
-                    "other_fields",
+                    "other_fields_of_competence",
                     models.CharField(
                         blank=True,
                         help_text="Sépare les domaines par des virgules, par exemple : Bilan carbone, Communication",
@@ -124,10 +124,10 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
-                    "fields",
+                    "fields_of_competence",
                     models.ManyToManyField(
                         blank=True,
-                        to="entrees.field",
+                        to="entrees.fieldofcompetence",
                         verbose_name="Domaines de compétence",
                     ),
                 ),

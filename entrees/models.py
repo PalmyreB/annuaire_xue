@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import gettext as _
 
 
+class FieldOfCompetence(models.Model):
     name = models.CharField(_("nom"), max_length=200)
     slug = models.SlugField(_("code"), null=False, unique=True)
 
@@ -52,10 +53,10 @@ class RecommendedContact(models.Model):
     reasons_to_contact = models.TextField(
         _("raisons pour lesquelles on peut contacter cette personne"), blank=True
     )
-    fields = models.ManyToManyField(
-        Field, verbose_name=_("domaines de compétence"), blank=True
+    fields_of_competence = models.ManyToManyField(
+        FieldOfCompetence, verbose_name=_("domaines de compétence"), blank=True
     )
-    other_fields = models.CharField(
+    other_fields_of_competence = models.CharField(
         _("autres domaines de compétence"),
         max_length=500,
         blank=True,

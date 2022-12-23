@@ -15,7 +15,11 @@ urlpatterns = [
         views.recommended_contact,
         name="recommended_contact",
     ),
-    path("field/<str:field_slug>/", views.FieldView.as_view(), name="field"),
+    path(
+        "field/<str:field_of_competence_slug>/",
+        views.FieldOfCompetenceView.as_view(),
+        name="field-of-competence",
+    ),
     path("form/", views.send_contacts, name="new-contact-form"),
-    path("contacts/", views.FieldView.as_view(), name="contacts"),
+    path("contacts/", views.FieldOfCompetenceView.as_view(), name="contacts"),
 ]

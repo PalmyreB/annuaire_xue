@@ -36,8 +36,8 @@ class RecommendedContactForm(ModelForm):
             "function",
             "engagements",
             "reasons_to_contact",
-            "fields",
-            "other_fields",
+            "fields_of_competence",
+            "other_fields_of_competence",
         ]
 
     # layout = Layout(
