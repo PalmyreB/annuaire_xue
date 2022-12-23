@@ -4,6 +4,7 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.timezone import now
+from django.utils.translation import gettext as _
 from django_filters.views import FilterView
 from django_tables2.views import SingleTableMixin
 
@@ -28,9 +29,9 @@ def referent_contact(request, referent_contact_id):
     try:
         contact = ReferentContact.objects.get(pk=referent_contact_id)
     except ReferentContact.DoesNotExist:
-        raise Http404("Ce contact n'existe pas.")
+        raise Http404(_("Ce contact n'existe pas."))
     return HttpResponse(
-        "Vous regardez le contact référent %s : %s." % (referent_contact_id, contact)
+        _("Vous regardez le contact référent %s : %s." % (referent_contact_id, contact))
     )
 
 
@@ -38,9 +39,9 @@ def recommended_contact(request, recommended_contact_id):
     try:
         contact = ReferentContact.objects.get(pk=recommended_contact_id)
     except ReferentContact.DoesNotExist:
-        raise Http404("Ce contact n'existe pas.")
+        raise Http404(_("Ce contact n'existe pas."))
     return HttpResponse(
-        "Vous regardez le contact recommandé %s." % recommended_contact_id
+        _("Vous regardez le contact recommandé %s." % recommended_contact_id)
     )
 
 

@@ -1,18 +1,19 @@
 {% extends 'material/frontend/base_site.html' %}
+{% load i18n %}
 
-{% block title %}Annuaire X-UE – {% block subtitle %}{% endblock %}{% endblock %}
-{% block page_title %}Annuaire X-UE{% endblock %}
+{% block title %}{% translate "Annuaire X-UE" %} – {% block subtitle %}{% endblock %}{% endblock %}
+{% block page_title %}{% translate "Annuaire X-UE" %}{% endblock %}
 
 {% block sidenav_items %}
 <p>
 <ul>
-    <li><a href="{% url 'entrees:index' %}">Accueil</a></li>
-    <li><a href="{% url 'entrees:contacts' %}">Tous les contacts</a></li>
-    <li><a href="{% url 'entrees:new-contact-form' %}">Formulaire</a></li>
+    <li><a href="{% url 'entrees:index' %}">{% translate "Accueil" %}</a></li>
+    <li><a href="{% url 'entrees:contacts' %}">{% translate "Tous les contacts" %}</a></li>
+    <li><a href="{% url 'entrees:new-contact-form' %}">{% translate "Formulaire" %}</a></li>
 </ul>
 </p>
 {% if field_list %}
-<span class="subheader">Domaines de compétence</span>
+<span class="subheader">{% translate "Domaines de compétence" %}</span>
 <p>
 <ul>
     {% for field in field_list %}

@@ -1,20 +1,21 @@
 {% extends 'entrees/base.html' %}
+{% load i18n %}
 
-{% block subtitle %}Accueil{% endblock %}
+{% block subtitle %}{% translate "Accueil" %}{% endblock %}
 
 {% block content %}
 <div class="left-panel">
     <div class="card">
         <div class="card-content">
-            <span class="card-title">Dernières inscriptions</span>
+            <span class="card-title">{% translate "Dernières inscriptions" %}</span>
             <p>{% if latest_referent_contact_list %}
             <ul>
                 {% for c in latest_referent_contact_list %}
-                <li><a href="{% url 'entrees:referent_contact' c.id %}">{{ c }}</a></li>
+                <li><a href="{% url 'entrees:referent-contact' c.id %}">{{ c }}</a></li>
                 {% endfor %}
             </ul>
             {% else %}
-            <p>Pas de contact enregistré.</p>
+            <p>{% translate "Pas de contact enregistré." %}</p>
             {% endif %}</p>
         </div>
     </div>

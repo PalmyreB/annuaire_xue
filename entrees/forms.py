@@ -1,6 +1,4 @@
-from django.forms import BooleanField, formset_factory, ModelForm, Form
-from .models import ReferentContact, RecommendedContact
-from material import Layout, Row, Fieldset
+from django.utils.translation import gettext as _
 
 
 class ReferentContactForm(ModelForm):
@@ -18,10 +16,14 @@ class ReferentContactForm(ModelForm):
 class RecommendedContactForm(ModelForm):
     prefix = "recommended"
     has_approved = BooleanField(
-        label="Je confirme que je m'engage à servir d'intermédiaire pour mettre en relation des personnes d'X-UE avec ce contact."
+        label=_(
+            "Je confirme que je m'engage à servir d'intermédiaire pour mettre en relation des personnes d'X-UE avec ce contact."
+        )
     )
     has_informed = BooleanField(
-        label="Je confirme que mon contact secondaire est informé qu'il figurera dans cet annuaire. "
+        label=_(
+            "Je confirme que mon contact secondaire est informé qu'il figurera dans cet annuaire. "
+        )
     )
 
     class Meta:

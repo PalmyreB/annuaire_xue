@@ -1,5 +1,6 @@
 {% extends 'entrees/base.html' %}
 {% load material_form material_frontend %}
+{% load i18n %}
 
 
 {% block subtitle %}Formulaire{% endblock %}
@@ -12,7 +13,7 @@
             <form action="{% url 'entrees:new-contact-form' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="card-content" id="form-container">
-                    <span class="card-title" id="referent-contact-title">Contact référent</span>
+                    <h4 class="card-title" id="referent-contact-title">{% translate "Contact référent" %}</h4>
                     {% block form %}
                     {% if view.layout or form.layout %}
                     {% if view.layout %}
@@ -25,11 +26,11 @@
                     {% form %}{% endform %}
                     {% endif %}
 
-                    <span class="card-title">Contacts recommandés</span>
+                    <h4 class="card-title">{% translate "Contacts recommandés" %}</h4>
                     {{formset.management_form}}
                     {% for recommended_form in formset %}
                     <div class="section recommended-contact-form">
-                        <h5 id="id-form-0-title">Contact recommandé n°1</h5>
+                        <h5 id="id-form-0-title">{% translate "Contact recommandé n°1" %}</h5>
                         <table>
                             {% form form=recommended_form %}{% endform %}
                         </table>
@@ -45,9 +46,9 @@
                     <div class="right-align">
                         {% block submit_row %}
                         <button id="add-form" type="button" class="waves-effect waves-light btn white-text">
-                            Ajouter un contact
+                            {% translate "Ajouter un contact" %}
                         </button>
-                        <button type="submit" class="waves-effect waves-light btn white-text">Enregistrer</button>
+                        <button type="submit" class="waves-effect waves-light btn white-text">{% translate "Enregistrer" %}</button>
                         {% endblock submit_row %}
                     </div>
                 </div>
@@ -60,8 +61,8 @@
 <div class="right-panel">
     <div class="sidenav" style="left: unset; top: auto; transform:unset">
         <ul>
-            <li><a href="#referent-contact-title">Contact référent</a></li>
-            <li><a href="#id-form-0-title">Contact recommandé n°1</a></li>
+            <li><a href="#referent-contact-title">{% translate "Contact référent" %}</a></li>
+            <li><a href="#id-form-0-title">{% translate "Contact recommandé n°1" %}</a></li>
         </ul>
     </div>
 </div>
@@ -89,17 +90,17 @@
 
         let newForm = recForm[0].cloneNode(true)
         let formRegex = RegExp(`form-(\\d){1}-`, 'g')
-        let titleRegex = RegExp(`n°(\\d){1}`, 'g')
+        let titleRegex = RegExp(`(\\d){1}`, 'g')
 
         let newLink = link.cloneNode(true)
 
         formNum++
         newForm.innerHTML = newForm.innerHTML.replace(formRegex, `form-${formNum}-`)
-        newForm.innerHTML = newForm.innerHTML.replace(titleRegex, `n°${formNum + 1}`)
+        newForm.innerHTML = newForm.innerHTML.replace(titleRegex, `${formNum + 1}`)
         container.insertBefore(newForm, container.lastChild)
 
         newLink.innerHTML = newLink.innerHTML.replace(formRegex, `form-${formNum}-`)
-        newLink.innerHTML = newLink.innerHTML.replace(titleRegex, `n°${formNum + 1}`)
+        newLink.innerHTML = newLink.innerHTML.replace(titleRegex, `${formNum + 1}`)
         navUl.insertBefore(newLink, navUl.lastChild)
 
         totalForms.setAttribute('value', `${formNum + 1}`)
