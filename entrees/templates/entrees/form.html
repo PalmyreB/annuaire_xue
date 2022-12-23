@@ -83,7 +83,7 @@
     let link = navUl.lastElementChild
 
     let formNum = recForm.length - 1
-    addButton.addEventListener('click', addForm)
+    addButton.addEventListener("click", addForm)
 
     function addForm(e) {
         e.preventDefault()
@@ -103,7 +103,7 @@
         newLink.innerHTML = newLink.innerHTML.replace(titleRegex, `${formNum + 1}`)
         navUl.insertBefore(newLink, navUl.lastChild)
 
-        totalForms.setAttribute('value', `${formNum + 1}`)
+        totalForms.setAttribute("value", `${formNum + 1}`)
     }
 </script>
 {% endblock messages %}

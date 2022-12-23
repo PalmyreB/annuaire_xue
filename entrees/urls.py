@@ -8,12 +8,12 @@ urlpatterns = [
     path(
         "referent/<int:referent_contact_id>/",
         views.referent_contact,
-        name="referent_contact",
+        name="referent-contact",
     ),
     path(
-        "recommended/<int:recommended_contact_id>/",
+        "recommended/<int:pk>/",
         views.recommended_contact,
-        name="recommended_contact",
+        name="recommended-contact",
     ),
     path(
         "field/<str:field_of_competence_slug>/",

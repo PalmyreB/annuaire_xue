@@ -39,8 +39,8 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("lastname", models.CharField(max_length=200, verbose_name="Nom")),
-                ("firstname", models.CharField(max_length=200, verbose_name="Prénom")),
+                ("first_name", models.CharField(max_length=200, verbose_name="Prénom")),
+                ("last_name", models.CharField(max_length=200, verbose_name="Nom de famille")),
                 (
                     "mail",
                     models.EmailField(max_length=200, verbose_name="Adresse email"),
@@ -85,8 +85,8 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("lastname", models.CharField(max_length=200, verbose_name="Nom")),
-                ("firstname", models.CharField(max_length=200, verbose_name="Prénom")),
+                ("first_name", models.CharField(max_length=200, verbose_name="Prénom")),
+                ("last_name", models.CharField(max_length=200, verbose_name="Nom de famille")),
                 (
                     "website",
                     models.URLField(blank=True, verbose_name="Site personnel"),

@@ -8,7 +8,11 @@ from django.utils.translation import gettext as _
 from django_filters.views import FilterView
 from django_tables2.views import SingleTableMixin
 
-from .forms import RecommendedContactFormset, ReferentContactForm
+from .forms import (
+    RecommendedContactForm,
+    RecommendedContactFormset,
+    ReferentContactForm,
+)
 from .models import FieldOfCompetence, RecommendedContact, ReferentContact
 
 
@@ -21,7 +25,6 @@ def index(request):
         "latest_referent_contact_list": latest_referent_contact_list,
         "field_list": field_list,
     }
-    # return render(request, "material/frontend/base.html", context)
     return render(request, "entrees/index.html", context)
 
 
@@ -94,16 +97,10 @@ class RecommendedContactsTable(tables.Table):
         model = RecommendedContact
 
 
-class AllContactsView(tables.SingleTableView):
-    table_class = SimpleTable
-    queryset = RecommendedContact.objects.all()
-    template_name = "entrees/table.html"
-
-
 class FieldOfCompetenceFilter(django_filters.FilterSet):
     class Meta:
         model = RecommendedContact
-        fields = ["firstname", "lastname", "fields_of_competence"]
+        fields = ["first_name", "last_name", "fields_of_competence"]
 
 
 class FieldOfCompetenceView(SingleTableMixin, FilterView):

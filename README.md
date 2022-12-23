@@ -90,7 +90,7 @@ Vous pouvez :
 
 - [ ] CSS : améliorer les styles ? remplacer Django Material par [AdminLTE](https://adminlte.io/) ou autre ?
 - [x] Formulaires contacts recommandés, avec bouton « + » (formulaires groupés)
-- [ ] Bouton « - » pour supprimer des formulaires contacts recommandés
+- [ ] Bouton « - » pour supprimer des formulaires contacts recommandés (pour le moment, case à cocher « Supprimer »)
 - [ ] Page avec tous les contacts et des filtres, notamment par domaine de compétence
   - [ ] Faciliter le contact des référents
 - [ ] Modus operandi
@@ -103,6 +103,9 @@ Vous pouvez :
 - [ ] Gestion de l'inscription d'un contact recommandé comme contact référent
   - On peut le garder comme contact recommandé, pour conserver ce pourquoi d'autres personnes le recommandent, amis faire un lien vers sa fiche de contact référent
 - [ ] Fiches pour les contacts, qui reprennent leurs informations et font un lien vers leurs contacts recommandés / référents
-- [ ] Mot de passe ou comptes pour protéger la consultation de l'annuaire ?
+- [ ] Comptes pour protéger la consultation de l'annuaire ? (autre solution : mot de passe)
+  - [ ] Permettre aux utilisateurs de modifier leurs infos persos
+  - [ ] Permettre aux utilisateurs de retrouver leur liste de contacts recommandés, de les modifier et de les supprimer
 - [ ] Bug sur le champ « Domaines de compétence » à l'ajout de formulaires de contacts recommandés
+- [ ] Bug sur le formulaire avec plusieurs contacts recommandés, lorsque l'on essaie de valider le formulaire sans tous les champs requis
 - [ ] Factorisation de left-panel et right-panel ?

@@ -6,10 +6,10 @@ class ReferentContactForm(ModelForm):
 
     class Meta:
         model = ReferentContact
-        fields = ["lastname", "firstname", "mail", "phone", "city", "promotion"]
+        fields = ["first_name", "last_name", "mail", "phone", "city", "promotion"]
 
     layout = Layout(
-        Row("firstname", "lastname"), "mail", Row("phone", "city", "promotion")
+        Row("first_name", "last_name"), "mail", Row("phone", "city", "promotion")
     )
 
 
@@ -29,8 +29,8 @@ class RecommendedContactForm(ModelForm):
     class Meta:
         model = RecommendedContact
         fields = [
-            "firstname",
-            "lastname",
+            "first_name",
+            "last_name",
             "website",
             "structure",
             "function",
