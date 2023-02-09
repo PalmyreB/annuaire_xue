@@ -73,34 +73,39 @@
 {% block messages %}
 <!-- Script pour ajouter un formulaire de contact recommandé -->
 <!-- TODO: Ajouter un script pour supprimer un formulaire de contact recommandé -->
-<script>
-    let recForm = document.querySelectorAll(".recommended-contact-form")
-    let container = document.querySelector("#form-container")
-    let addButton = document.querySelector("#add-form")
-    let totalForms = document.querySelector("#id_form-TOTAL_FORMS")
+<script language="JavaScript" type="text/javascript">
+        let recForm = document.querySelectorAll(".recommended-contact-form")
+        let container = document.querySelector("#form-container")
+        let addButton = document.querySelector("#add-form")
+        let totalForms = document.querySelector("#id_form-TOTAL_FORMS")
 
-    let navUl = document.querySelectorAll(".right-panel div.sidenav")[0].lastElementChild
-    let link = navUl.lastElementChild
+        let navUl = document.querySelectorAll(".right-panel div.sidenav")[0].lastElementChild
+        let link = navUl.lastElementChild
 
-    let formNum = recForm.length - 1
-    addButton.addEventListener("click", addForm)
+        let formNum = recForm.length - 1
+    
+        addButton.addEventListener("click", addForm)
+
 
     function addForm(e) {
         e.preventDefault()
 
         let newForm = recForm[0].cloneNode(true)
-        let formRegex = RegExp(`form-(\\d){1}-`, 'g')
-        let titleRegex = RegExp(`(\\d){1}`, 'g')
+        let formRegex = "form-0-"
+        let titleRegex = `{% translate "Contact recommandé n°1" %}`
 
         let newLink = link.cloneNode(true)
 
         formNum++
-        newForm.innerHTML = newForm.innerHTML.replace(formRegex, `form-${formNum}-`)
-        newForm.innerHTML = newForm.innerHTML.replace(titleRegex, `${formNum + 1}`)
+        formString = `form-${formNum}-`
+        titleString = `{% translate "Contact recommandé n°${formNum + 1}" %}`
+
+        newForm.innerHTML = newForm.innerHTML.replace(formRegex, formString)
+        newForm.innerHTML = newForm.innerHTML.replace(titleRegex, titleString)
         container.insertBefore(newForm, container.lastChild)
 
-        newLink.innerHTML = newLink.innerHTML.replace(formRegex, `form-${formNum}-`)
-        newLink.innerHTML = newLink.innerHTML.replace(titleRegex, `${formNum + 1}`)
+        newLink.innerHTML = newLink.innerHTML.replace(formRegex, formString)
+        newLink.innerHTML = newLink.innerHTML.replace(titleRegex, titleString)
         navUl.insertBefore(newLink, navUl.lastChild)
 
         totalForms.setAttribute("value", `${formNum + 1}`)

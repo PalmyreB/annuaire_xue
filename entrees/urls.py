@@ -12,7 +12,7 @@ urlpatterns = [
     ),
     path(
         "recommended/<int:pk>/",
-        views.recommended_contact,
+        views.RecommendedContactDetailView.as_view(),
         name="recommended-contact",
     ),
     path(

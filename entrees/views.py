@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.utils.timezone import now
 from django.utils.translation import gettext as _
+from django.views.generic import DetailView
 from django_filters.views import FilterView
 from django_tables2.views import SingleTableMixin
 
@@ -38,6 +39,25 @@ def referent_contact(request, referent_contact_id):
     )
 
 
+class RecommendedContactDetailView(DetailView):
+    model = RecommendedContact
+    form_class = RecommendedContactForm
+
+    def get_context_data(self, **kwargs):
+        form = self.form_class(instance=self.get_object())
+        form.fields.pop("has_approved", None)
+        form.fields.pop("has_informed", None)
+        for field in form.fields:
+            form.fields[field].widget.attrs["readonly"] = True
+        context = super().get_context_data(**kwargs)
+        context.update(
+            {
+                "form": form,
+            }
+        )
+        return context
+
+
 def recommended_contact(request, recommended_contact_id):
     try:
         contact = ReferentContact.objects.get(pk=recommended_contact_id)
@@ -49,6 +69,8 @@ def recommended_contact(request, recommended_contact_id):
 
 
 def send_contacts(request):
+    # TODO: make a class view instead of a method view
+    # TODO: add class description
     # if this is a POST request we need to process the form data
     if request.method == "POST":
         # create a form instance and populate it with data from the request:
@@ -71,6 +93,7 @@ def send_contacts(request):
                 # Manage additional fields
                 recommended_contact_data.pop("has_approved", None)
                 recommended_contact_data.pop("has_informed", None)
+                recommended_contact_data.pop("DELETE", None)
 
                 recommended_contact_data["referent_contact"] = referent_contact
                 recommended_contact = RecommendedContact(**recommended_contact_data)
@@ -120,3 +143,16 @@ class FieldOfCompetenceView(SingleTableMixin, FilterView):
             return RecommendedContact.objects.filter(
                 fields_of_competence__slug=self.kwargs["field_of_competence_slug"]
             )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if "field_of_competence_slug" in self.kwargs:
+            field_of_competence = FieldOfCompetence.objects.get(
+                slug=self.kwargs["field_of_competence_slug"]
+            )
+            context.update(
+                {
+                    "field_of_competence": field_of_competence.name,
+                }
+            )
+        return context

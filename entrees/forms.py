@@ -1,4 +1,8 @@
+from django.forms import BooleanField, ModelForm, formset_factory
 from django.utils.translation import gettext as _
+from material import Layout, Row
+
+from .models import RecommendedContact, ReferentContact
 
 
 class ReferentContactForm(ModelForm):
@@ -41,13 +45,15 @@ class RecommendedContactForm(ModelForm):
         ]
 
     # layout = Layout(
-    #     Row("firstname", "lastname"),
+    #     Row("first_name", "last_name"),
     #     "website",
     #     Row("structure", "function"),
     #     "engagements",
     #     "reasons_to_contact",
-    #     "fields",
-    #     "other_fields",
+    #     "fields_of_competence",
+    #     "other_fields_of_competence",
+    #     Row("has_approved", "has_informed"),
+    #     "DELETE",
     # )
 
 
