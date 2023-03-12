@@ -2,7 +2,7 @@
 
 ## Présentation
 
-Ce dépôt contient un annuaire qui permet de recommander des contacts intéressants, sous la forme d'une application Django. Ce projet est né au sein de l'association X-Urgence écologique.
+Ce dépôt contient un annuaire qui permet de recommander des contacts intéressants, sous la forme d'une application Django. Ce projet est né au sein de l'association X-Urgence écologique (XUE).
 
 ## Prérequis
 
@@ -35,22 +35,28 @@ Ce dépôt contient un annuaire qui permet de recommander des contacts intéress
    source venv/Scripts/activate
    ```
 
-5. Créer un profil de super-utilisateur
-
-   ```sh
-   python manage.py createsuperuser
-   ```
-
-6. Installer les _requirements_
+5. Installer les _requirements_
 
    ```sh
    pip install -r requirements.txt
+   ```
+
+6. Créer un fichier nommé `.env` avec la clé secrète communiquée par un administrateur (à défaut, pour des tests locaux, une clé arbitraire – ne pas mettre les accolades dans cette commande)
+
+   ```sh
+   echo -e "SECRET_KEY={votre clé secrète}\nSECRET_KEY_FALLBACKS=" > .env
    ```
 
 7. Lancer les migrations
 
    ```sh
    python manage.py migrate
+   ```
+
+8. Créer un profil de super-utilisateur
+
+   ```sh
+   python manage.py createsuperuser
    ```
 
 ## Lancer le projet
@@ -84,13 +90,15 @@ Vous pouvez :
 - [ ] Passage à PostgreSQL ?
 - [ ] Wiki GitHub pour expliquer aux admins les manips ?
 - [ ] Hébergement (application + base de données)
-- [ ] Méthode de gestion de projet : tâches en tant qu'issues ? dans le README ?
+- [ ] Méthode de gestion de projet : tâches en tant qu'issues ?
 
 ### Code
 
 - [ ] CSS : améliorer les styles ? remplacer Django Material par [AdminLTE](https://adminlte.io/) ou autre ?
-- [x] Formulaires contacts recommandés, avec bouton « + » (formulaires groupés)
-- [ ] Bouton « - » pour supprimer des formulaires contacts recommandés (pour le moment, case à cocher « Supprimer »)
+- [ ] Formulaires contacts recommandés
+  - [x] Bouton « + » (formulaires groupés)
+  - [ ] Bouton « - » pour supprimer des formulaires contacts recommandés (pour le moment, case à cocher « Supprimer »)
+  - [ ] Une page par formulaire (une pour le contact principal et une par contact recommandé) pour éviter les bugs actuels
 - [ ] Page avec tous les contacts et des filtres, notamment par domaine de compétence
   - [ ] Faciliter le contact des référents
 - [ ] Modus operandi
