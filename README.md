@@ -11,6 +11,8 @@ Ce dépôt contient un annuaire qui permet de recommander des contacts intéress
 
 ## Installation du projet
 
+### Pour Windows
+
 1. Cloner le projet
 
    ```sh
@@ -59,6 +61,53 @@ Ce dépôt contient un annuaire qui permet de recommander des contacts intéress
    python manage.py createsuperuser
    ```
 
+### Pour Linux
+
+Seules les étapes 4. et 6. sont modifiées de la façon suivante :
+
+1. Pour activer l'environnement virtuel il faut utiliser
+
+   ```sh
+   source venv/bin/activate
+   ```
+
+2. Créer le fichier .env avec nano et y coller les champs SECRET_KEY et SECRET_KEY_FALLBACKS (Ctrl+Shift+V)
+
+   ```sh
+   nano .env
+   ```
+
+### Via PyCharm
+
+1. Installer PyCharm et python
+
+2. Lancer PyCharm et créer un nouveau projet depuis un VCS
+
+3. Choisir Git et donner comme URL : https://github.com/PalmyreB/annuaire_xue.git
+
+4. Créer un venv dans PyCharm (Ctrl+Alt+S si le logiciel ne le propose pas puis aller dans Interpréteur) en donnant le chemin vers votre python
+
+5. Installer les prérequis dans la console PyCharm
+
+   ```sh
+   pip install -r requirements.txt
+   ```
+
+6. Créer un nouveau fichier .env et y ajouter les champs SECRET_KEY et SECRET_KEY_FALLBACKS communiqués par un admin
+
+7. Ajouter .idea/ au fichier .gitignore
+
+8. Lancer les migrations
+
+   ```sh
+   python manage.py migrate
+   ```
+
+9. Créer un profil de super-utilisateur
+
+   ```sh
+   python manage.py createsuperuser
+   ```
 ## Lancer le projet
 
 Avec l'environnement virtuel actuel, lancer la commande suivante depuis la racine
