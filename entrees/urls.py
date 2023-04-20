@@ -8,7 +8,7 @@ urlpatterns = [
     path("", views.index, name="index"),
     path(
         "referent/<int:referent_contact_id>/",
-        views.referent_contact,
+        views.referent_contact_view,
         name="referent-contact",
     ),
     path(
@@ -23,4 +23,5 @@ urlpatterns = [
     ),
     path("form/", views.send_contacts, name="new-contact-form"),
     path("contacts/", views.FieldOfCompetenceView.as_view(), name="contacts"),
+    path("new-contact/", views.ContactWizard.as_view(), name="new-contact"),
 ]

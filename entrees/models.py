@@ -15,6 +15,7 @@ class FieldOfCompetence(models.Model):
 
 
 class ReferentContact(models.Model):
+    base_fields = {}
     first_name = models.CharField(_("prénom"), max_length=200)
     last_name = models.CharField(_("nom de famille"), max_length=200)
     mail = models.EmailField(_("adresse email"), max_length=200)

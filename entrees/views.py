@@ -8,13 +8,39 @@ from django.utils.translation import gettext as _
 from django.views.generic import DetailView
 from django_filters.views import FilterView
 from django_tables2.views import SingleTableMixin
+from formtools.wizard.views import SessionWizardView
 
 from .forms import (
     RecommendedContactForm,
     RecommendedContactFormset,
+    RecommendedContactInlineFormset,
     ReferentContactForm,
 )
 from .models import FieldOfCompetence, RecommendedContact, ReferentContact
+
+
+def save_referent_contact(form):
+    referent_contact_data = form.cleaned_data
+    referent_contact_data["registration_date"] = now()
+    referent_contact = ReferentContact(**referent_contact_data)
+    referent_contact.save()
+    return referent_contact
+
+
+def save_recommended_contact(form, referent_contact):
+    recommended_contact_data = form.cleaned_data
+    # Manage many-to-many relationships
+    fields_of_competence = recommended_contact_data.pop("fields_of_competence", [])
+    # Manage additional fields
+    recommended_contact_data.pop("has_approved", None)
+    recommended_contact_data.pop("has_informed", None)
+    recommended_contact_data.pop("DELETE", None)
+
+    recommended_contact_data["referent_contact"] = referent_contact
+    recommended_contact = RecommendedContact(**recommended_contact_data)
+    recommended_contact.save()
+    recommended_contact.fields_of_competence.set(fields_of_competence)
+    return recommended_contact
 
 
 def index(request):
@@ -29,7 +55,7 @@ def index(request):
     return render(request, "entrees/index.html", context)
 
 
-def referent_contact(request, referent_contact_id):
+def referent_contact_view(request, referent_contact_id):
     try:
         contact = ReferentContact.objects.get(pk=referent_contact_id)
     except ReferentContact.DoesNotExist:
@@ -79,26 +105,9 @@ def send_contacts(request):
         # check whether it's valid:
         if form.is_valid() and formset.is_valid():
             # process the data in form.cleaned_data as
-            referent_contact_data = form.cleaned_data
-            referent_contact_data["registration_date"] = now()
-            referent_contact = ReferentContact(**referent_contact_data)
-            referent_contact.save()
-
+            referent_contact = save_referent_contact(form)
             for current_form in formset:
-                recommended_contact_data = current_form.cleaned_data
-                # Manage many-to-many relationships
-                fields_of_competence = recommended_contact_data.pop(
-                    "fields_of_competence", []
-                )
-                # Manage additional fields
-                recommended_contact_data.pop("has_approved", None)
-                recommended_contact_data.pop("has_informed", None)
-                recommended_contact_data.pop("DELETE", None)
-
-                recommended_contact_data["referent_contact"] = referent_contact
-                recommended_contact = RecommendedContact(**recommended_contact_data)
-                recommended_contact.save()
-                recommended_contact.fields_of_competence.set(fields_of_competence)
+                save_recommended_contact(current_form, referent_contact)
 
             # redirect to a new URL:
             return HttpResponseRedirect(reverse("entrees:index"))
@@ -156,3 +165,17 @@ class FieldOfCompetenceView(SingleTableMixin, FilterView):
                 }
             )
         return context
+
+
+class ContactWizard(SessionWizardView):
+    form_list = (
+        ("referent_contact", ReferentContactForm),
+        ("recommended_contacts", RecommendedContactInlineFormset),
+    )
+    template_name = "entrees/wizard.html"
+
+    def done(self, form_list, form_dict, **kwargs):
+        referent_contact = save_referent_contact(form_dict["referent_contact"])
+        for form in form_dict["recommended_contacts"]:
+            save_recommended_contact(form, referent_contact)
+        return HttpResponseRedirect(reverse("entrees:contacts"))

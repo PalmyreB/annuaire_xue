@@ -1,4 +1,6 @@
 {% extends 'material/frontend/base_site.html' %}
+{% include 'material/includes/material_css.html' %}
+{% include 'material/includes/material_js.html' %}
 {% load i18n %}
 
 {% block title %}{% translate "Annuaire X-UE" %} – {% block subtitle %}{% endblock %}{% endblock %}
@@ -10,6 +12,7 @@
     <li><a href="{% url 'entrees:index' %}">{% translate "Accueil" %}</a></li>
     <li><a href="{% url 'entrees:contacts' %}">{% translate "Tous les contacts" %}</a></li>
     <li><a href="{% url 'entrees:new-contact-form' %}">{% translate "Formulaire" %}</a></li>
+    <li><a href="{% url 'entrees:new-contact' %}">{% translate "Formulaire multi-page" %}</a></li>
 </ul>
 </p>
 {% if field_list %}
@@ -18,7 +21,8 @@
 <ul>
     {% for field_of_competence in field_list %}
     <li {% if forloop.last %}class="last" {% endif %}>
-        <a href="{% url 'entrees:field-of-competence' field_of_competence.slug %}" class="collapsible-header" data-turbolinks="false">
+        <a href="{% url 'entrees:field-of-competence' field_of_competence.slug %}" class="collapsible-header"
+            data-turbolinks="false">
             {{ field_of_competence.name }}
         </a>
     </li>
