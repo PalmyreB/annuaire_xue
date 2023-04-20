@@ -7,22 +7,8 @@
 <div class="left-panel">
     <div class="card">
         <div class="card-content">
-            <span class="card-title">{% translate "Dernières inscriptions" %}</span>
-            <p>{% if latest_referent_contact_list %}
-            <ul>
-                {% for c in latest_referent_contact_list %}
-                <li><a href="{% url 'entrees:referent-contact' c.id %}">{{ c }}</a></li>
-                {% endfor %}
-            </ul>
-            {% else %}
-            <p>{% translate "Pas de contact enregistré." %}</p>
-            {% endif %}</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-content">
             <span class="card-title">{% translate "Raison d'être" %}</span>
+            {% blocktranslate %}
             <p>Le collectif <a
                     href="https://www.lajauneetlarouge.com/x-urgence-ecologique-les-polytechniciens-qui-ne-regardent-pas-ailleurs/">X-Urgence
                     Écologique</a> (X-UE) rassemble déjà plusieurs centaines d'alumni. Nous pensons que
@@ -49,6 +35,43 @@
                 annuaire, suggérer des fonctionnalités voire contribuer au développement de la version sous Django ?
                 Alors n'hésite pas à écrire à : <a
                     href="mailto:annuaire@xue.polytechnique.org">annuaire@xue.polytechnique.org</a></p>
+            {% endblocktranslate %}
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">{% translate "Comment remplir l'annuaire&nbsp;?" %}</span>
+            <form>
+                <input type="submit" value="{% translate 'Formulaire' %}"
+                    formaction="{% url 'entrees:new-contact-form' %}" class="btn btn-primary" />
+            </form>
+            <br />
+            {% blocktranslate %}
+            <p>
+                Quelques points pour les recommandations de contacts que tu pourrais faire :
+            <ul>
+                <li>Si toi-même tu es d'accord pour être contacté et ne pas simplement être référent d'autres contacts,
+                    n'oublie pas de t'ajouter à l'annuaire !</li>
+                <li>Par ailleurs, sois assuré que <strong>tu resteras l'intermédiaire entre tes recommandations de
+                        contacts et
+                        les éventuels membres intéressés pour leur parler</strong>.</li>
+            </ul>
+            </p>
+            {% endblocktranslate %}
+        </div>
+
+        <div class="card-content">
+            <span class="card-title">{% translate "Comment consulter l'annuaire&nbsp;?" %}</span>
+            <form>
+                <input type="submit" value="{% translate 'Contacts' %}" formaction="{% url 'entrees:contacts' %}"
+                    class="btn btn-primary" />
+            </form>
+            <br />
+            {% blocktranslate %}
+            <p>Pour rappel, afin de prendre contact avec quelqu'un, <strong>n'oublie pas de passer par le référent
+                    indiqué</strong>.</p>
+            {% endblocktranslate %}
         </div>
     </div>
 </div>
