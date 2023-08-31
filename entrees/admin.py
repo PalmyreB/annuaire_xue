@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import FieldOfCompetence, ReferentContact, RecommendedContact
+from .models import FieldOfCompetence, RecommendedContact, ReferentContact
 
 admin.site.register(FieldOfCompetence)
 admin.site.register(ReferentContact)
