@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext as _
 
@@ -15,9 +16,7 @@ class FieldOfCompetence(models.Model):
 
 
 class ReferentContact(models.Model):
-    first_name = models.CharField(_("prénom"), max_length=200)
-    last_name = models.CharField(_("nom de famille"), max_length=200)
-    mail = models.EmailField(_("adresse email"), max_length=200)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone = models.CharField(
         _("numéro de téléphone"),
         max_length=200,
@@ -33,14 +32,13 @@ class ReferentContact(models.Model):
             "Au format X04 pour le cycle ingénieur polytechnicien, D98 pour le doctorat de Polytechnique, M09 pour le master, B22 pour le bachelor"
         ),
     )
-    registration_date = models.DateTimeField(_("date d'inscription"))
 
     class Meta:
         verbose_name = _("contact référent")
         verbose_name_plural = _("contacts référents")
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.user.first_name} {self.user.last_name}"
 
 
 class RecommendedContact(models.Model):

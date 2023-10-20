@@ -1,7 +1,8 @@
-"""annuaire_xue URL Configuration
+"""
+URL configuration for annuaire_xue project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.1/topics/http/urls/
+    https://docs.djangoproject.com/en/dev/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -14,11 +15,42 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path
-from material.frontend import urls as frontend_urls
+from django.contrib.auth.models import User
+from django.urls import path
+from viewflow.contrib.auth import AuthViewset
+from viewflow.urls import Application, ModelViewset, ReadonlyModelViewset, Site
+
+from entrees import models as entrees_models
+from entrees import viewsets as entrees_viewsets
+
+site = Site(
+    title="Annuaire X-UE",
+    viewsets=[
+        Application(
+            title="Utilisateurs et contacts",
+            icon="people",
+            app_name="people",
+            viewsets=[
+                ModelViewset(model=User),
+                entrees_viewsets.ReferentContactViewset(),
+                entrees_viewsets.RecommendedContactViewset(),
+            ],
+        ),
+        Application(
+            title="Domaines de compétence",
+            icon="book",
+            app_name="fields",
+            viewsets=[
+                ReadonlyModelViewset(
+                    model=entrees_models.FieldOfCompetence, icon="book"
+                ),
+            ],
+        ),
+    ],
+)
 
 urlpatterns = [
-    path("", include(frontend_urls)),
-    path("entrees/", include("entrees.urls")),
     path("admin/", admin.site.urls),
+    path("accounts/", AuthViewset(with_profile_view=False).urls),
+    path("", site.urls),
 ]
