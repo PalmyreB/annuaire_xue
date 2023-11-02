@@ -19,7 +19,16 @@
     </div>
 </div>
 {% endblock left-panel %}
-
+<script>
+    $(document).ready(function($) {
+        $("tbody tr").hover(function() {
+            $(this).css('cursor','pointer');
+        });
+        $("tbody tr").click(function() {
+            window.location = $(this).data("href");
+        });
+    });
+</script>
 {% if filter %}
 {% block right-panel %}
 <div class="right-panel">

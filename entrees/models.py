@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import gettext as _
 
 
@@ -67,6 +68,9 @@ class RecommendedContact(models.Model):
     referent_contact = models.ForeignKey(
         ReferentContact, verbose_name=_("contact référent"), on_delete=models.PROTECT
     )
+
+    def get_recommended_url(self):
+        return reverse('entrees:recommended-contact', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = _("contact recommandé")

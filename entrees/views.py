@@ -118,7 +118,7 @@ class RecommendedContactsTable(tables.Table):
 
     class Meta:
         model = RecommendedContact
-
+        row_attrs = {'data-href': lambda record: record.get_recommended_url}
 
 class FieldOfCompetenceFilter(django_filters.FilterSet):
     class Meta:
