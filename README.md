@@ -83,7 +83,7 @@ Seules les étapes 4. et 6. sont modifiées de la façon suivante :
 
 2. Lancer PyCharm et créer un nouveau projet depuis un VCS
 
-3. Choisir Git et donner comme URL : https://github.com/PalmyreB/annuaire_xue.git
+3. Choisir Git et donner comme URL : <https://github.com/PalmyreB/annuaire_xue.git>
 
 4. Créer un venv dans PyCharm (Ctrl+Alt+S si le logiciel ne le propose pas puis aller dans Interpréteur) en donnant le chemin vers votre python
 
@@ -108,6 +108,7 @@ Seules les étapes 4. et 6. sont modifiées de la façon suivante :
    ```sh
    python manage.py createsuperuser
    ```
+
 ## Lancer le projet
 
 Avec l'environnement virtuel actuel, lancer la commande suivante depuis la racine
@@ -130,4 +131,5 @@ Vous pouvez :
 ## Ressources
 
 - [Documentation Django](https://docs.djangoproject.com/en/4.1/)
-- [Django Material](https://github.com/viewflow/django-material/)
+- [Django Viewflow](https://github.com/viewflow/viewflow/)
+- [~~Django Material~~](https://github.com/viewflow/django-material/) (bibliothèque utilisée avant qu'elle ne soit remplacée par Django Viewflow)

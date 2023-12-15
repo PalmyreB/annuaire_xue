@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth.models import User
-from django.urls import path
+from django.urls import include, path
 from viewflow.contrib.auth import AuthViewset
 from viewflow.urls import Application, ModelViewset, ReadonlyModelViewset, Site
 
@@ -51,6 +51,7 @@ site = Site(
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("accounts/", AuthViewset(with_profile_view=False).urls),
+    path("accounts/", AuthViewset(with_profile_view=True).urls),
+    path("entrees/", include(("entrees.urls", "entrees"))),
     path("", site.urls),
 ]

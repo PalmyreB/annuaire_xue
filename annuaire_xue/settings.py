@@ -62,7 +62,7 @@ ROOT_URLCONF = "annuaire_xue.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": ["venv/Lib/site-packages/viewflow/templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
