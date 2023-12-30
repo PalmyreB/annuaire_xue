@@ -5,14 +5,14 @@ from django.contrib.auth.models import User
 from entrees.models import FieldOfCompetence, RecommendedContact, ReferentContact
 
 
-class ReferenctContactInline(admin.StackedInline):
+class ReferentContactInline(admin.StackedInline):
     model = ReferentContact
     can_delete = False
 
 
 # Define a new User admin
 class UserAdmin(BaseUserAdmin):
-    inlines = [ReferenctContactInline]
+    inlines = [ReferentContactInline]
 
 
 # Re-register UserAdmin
