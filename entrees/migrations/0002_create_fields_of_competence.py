@@ -16,11 +16,13 @@ def create_fields_of_competence(apps, schema_editor):
     ) as field_file:
         data = field_file.read()
     field_list = json.loads(data)
-    for field_name in field_list:
+    for field_item in field_list:
         field = {
-            "name": field_name,
-            "slug": slugify(field_name).replace("&", "-et-"),
+            "name": field_item["name"],
+            "slug": slugify(field_item["name"]).replace("&", "-et-").replace("/", "-"),
         }
+        if "icon" in field_item:
+            field["icon"] = field_item["icon"]
         FieldOfCompetence.objects.create(**field)
 
 

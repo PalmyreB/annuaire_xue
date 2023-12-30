@@ -1,33 +1,126 @@
 [
-  "Agriculture",
-  "Biodiversité",
-  "Climat",
-  "Conseil",
-  "Construction",
-  "Déchets",
-  "Droit",
-  "Eau",
-  "Économie circulaire",
-  "Économie",
-  "Énergie",
-  "Enseignement",
-  "Fonction publique",
-  "Gouvernance",
-  "Green Tech",
-  "Impact environnemental de l'industrie",
-  "Industrie",
-  "Information/médias",
-  "Informatique/data science",
-  "International",
-  "Justice environnementale",
-  "Justice sociale",
-  "Low-Tech",
-  "Monde de l'ESS",
-  "Philosophie",
-  "Qualité de l'air",
-  "R&D",
-  "Recherche académique",
-  "RH/médiation",
-  "Sociologie",
-  "Transport/mobilité"
+  {
+		"name": "Agriculture",
+		"icon": "agriculture"
+	},
+  {
+		"name": "Biodiversité",
+		"icon": "raven"
+	},
+  {
+		"name": "Climat",
+		"icon": "thermostat"
+	},
+  {
+		"name": "Conseil",
+		"icon": "nest_found_savings"
+	},
+  {
+		"name": "Construction",
+		"icon": "construction"
+	},
+  {
+		"name": "Déchets",
+		"icon": "recycling"
+	},
+  {
+		"name": "Droit",
+		"icon": "policy"
+	},
+  {
+		"name": "Eau",
+		"icon": "water_drop"
+	},
+  {
+		"name": "Économie circulaire",
+		"icon": "compost"
+	},
+  {
+		"name": "Économie",
+		"icon": "savings"
+	},
+  {
+		"name": "Énergie",
+		"icon": "bolt"
+	},
+  {
+		"name": "Enseignement",
+		"icon": ""
+	},
+  {
+		"name": "Fonction publique",
+		"icon": "account_balance"
+	},
+  {
+		"name": "Gouvernance",
+		"icon": ""
+	},
+  {
+		"name": "Green Tech",
+		"icon": "energy_savings_leaf"
+	},
+  {
+		"name": "Impact environnemental de l'industrie",
+		"icon": "barefoot"
+	},
+  {
+		"name": "Industrie",
+		"icon": "factory"
+	},
+  {
+		"name": "Information/médias",
+		"icon": "newpaper"
+	},
+  {
+		"name": "Informatique/data science",
+		"icon": "computer"
+	},
+  {
+		"name": "International",
+		"icon": "globe"
+	},
+  {
+		"name": "Justice environnementale",
+		"icon": "gavel"
+	},
+  {
+		"name": "Justice sociale",
+		"icon": "balance"
+	},
+  {
+		"name": "Low-Tech",
+		"icon": "handyman"
+	},
+  {
+		"name": "Monde de l'ESS",
+		"icon": ""
+	},
+  {
+		"name": "Philosophie",
+		"icon": "psychology_alt"
+	},
+  {
+		"name": "Qualité de l'air",
+		"icon": "air"
+	},
+  {
+		"name": "R&D",
+		"icon": "science"
+	},
+  {
+		"name": "Recherche académique",
+		"icon": "school"
+	},
+  {
+		"name": "RH/médiation",
+		"icon": ""
+	},
+  {
+		"name": "Sociologie",
+		"icon": "diversity_3"
+	},
+  {
+		"name": "Transport/mobilité",
+		"icon": "train"
+	}
 ]

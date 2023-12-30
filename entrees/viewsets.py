@@ -50,6 +50,8 @@ class RecommendedContactByFieldViewset(ReadonlyModelViewset):
         if "field" in kwargs:
             self.field = kwargs.pop("field")
         if self.field:
+            if self.field.icon:
+                self.icon = self.field.icon
             if self.namespace:
                 self.namespace = f"{self.namespace}:{self.field.slug}"
             else:

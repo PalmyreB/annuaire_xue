@@ -27,6 +27,7 @@ class Migration(migrations.Migration):
                 ),
                 ("name", models.CharField(max_length=200, verbose_name="nom")),
                 ("slug", models.SlugField(unique=True, verbose_name="code")),
+                ("icon", models.CharField(max_length=200, verbose_name="icône")),
             ],
             options={
                 "verbose_name": "domaine de compétence",
@@ -63,7 +64,7 @@ class Migration(migrations.Migration):
                     models.CharField(
                         blank=True,
                         help_text="Au format X04 pour le cycle ingénieur polytechnicien, D98 pour le doctorat de Polytechnique, M09 pour le master, B22 pour le bachelor",
-                        max_length=200,
+                        max_length=10,
                         verbose_name="promotion",
                     ),
                 ),

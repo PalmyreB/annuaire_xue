@@ -6,6 +6,9 @@ from django.utils.translation import gettext as _
 class FieldOfCompetence(models.Model):
     name = models.CharField(_("nom"), max_length=200)
     slug = models.SlugField(_("code"), null=False, unique=True)
+    icon = models.CharField(
+        _("icône"), max_length=200, help_text=_("Nom de l'icône Material")
+    )
 
     class Meta:
         verbose_name = _("domaine de compétence")
@@ -26,7 +29,7 @@ class ReferentContact(models.Model):
     city = models.CharField(_("ville"), max_length=200, blank=True)
     promotion = models.CharField(
         _("promotion"),
-        max_length=200,
+        max_length=10,
         blank=True,
         help_text=_(
             "Au format X04 pour le cycle ingénieur polytechnicien, D98 pour le doctorat de Polytechnique, M09 pour le master, B22 pour le bachelor"
