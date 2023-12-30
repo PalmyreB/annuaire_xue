@@ -15,42 +15,28 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.contrib.auth.models import User
 from django.urls import include, path
 from viewflow.contrib.auth import AuthViewset
-from viewflow.urls import Application, ModelViewset, ReadonlyModelViewset, Site
+from viewflow.urls import Site
 
-from entrees import models as entrees_models
-from entrees import viewsets as entrees_viewsets
+from entrees import applications as entrees_applications
+from entrees import views as entrees_views
 
 site = Site(
     title="Annuaire X-UE",
+    primary_color="#003e5c",
+    secondary_color="#d52b1e",
     viewsets=[
-        Application(
-            title="Utilisateurs et contacts",
-            icon="people",
-            app_name="people",
-            viewsets=[
-                ModelViewset(model=User),
-                entrees_viewsets.ReferentContactViewset(),
-                entrees_viewsets.RecommendedContactViewset(),
-            ],
-        ),
-        Application(
-            title="Domaines de compétence",
-            icon="book",
-            app_name="fields",
-            viewsets=[
-                ReadonlyModelViewset(
-                    model=entrees_models.FieldOfCompetence, icon="book"
-                ),
-            ],
-        ),
+        entrees_applications.HomeApplication(),
+        entrees_applications.PeopleApplication(),
+        entrees_applications.FieldsApplication(),
     ],
 )
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("accounts/login/", entrees_views.LoginView.as_view()),
+    path("accounts/register/", entrees_views.sign_up, name="register"),
     path("accounts/", AuthViewset(with_profile_view=True).urls),
     path("entrees/", include(("entrees.urls", "entrees"))),
     path("", site.urls),

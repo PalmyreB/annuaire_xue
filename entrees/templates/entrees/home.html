@@ -1,0 +1,40 @@
+{% extends request.resolver_match.app.base_template_name|default:'viewflow/base_page.html' %}
+{% load i18n static viewflow %}
+
+{% load i18n viewflow %}
+
+{% block content %}
+<div class="mdc-card mdc-card--outlined mdc-typography--subtitle1" style="height:auto; padding: 20px; margin: 20px; width: 100%">
+    <p>Le collectif <a
+            href="https://www.lajauneetlarouge.com/x-urgence-ecologique-les-polytechniciens-qui-ne-regardent-pas-ailleurs/">X-Urgence
+            Écologique</a> (X-UE) rassemble déjà plusieurs centaines d'alumni. Nous pensons que
+        beaucoup de ses membres s'interrogent sur leur parcours professionnel et voudraient se rendre plus
+        utiles et faire réellement bouger les lignes, mais <strong>manquent de conseils et de retours
+            d'expérience</strong> de
+        personnes ayant déjà travaillé dans les domaines liés à la transition écologique. Pour cela, nous avons
+        mis en place un annuaire construit par les membres d'X-UE pour les membres d'X-UE, afin de
+        <strong>faciliter les
+            prises de contact entre nous</strong>, mais aussi et surtout pour <strong>élargir notre réseau et
+            recommander d'autres
+            profils intéressants à l'intérieur et au-delà de la communauté polytechnicienne</strong>.
+    </p>
+
+    <p>Les personnes recommandées dans cet annuaire sont engagées sur les questions d'urgence écologique, dans
+        leur travail actuel ou passé, et ont un parcours qui pourrait être intéressant pour des membres du
+        collectif.</p>
+
+    <p>Tu penses que ton parcours, professionnel ou personnel, pourrait intéresser, voire inspirer, ou tu
+        connais des personnes pour qui c'est le cas et tu souhaiterais donner à la communauté l'opportunité de
+        les contacter par ton intermédiaire ? <strong>Alors remplis ce questionnaire !</strong></p>
+
+    <p>Tu as des questions ou remarques sur ce formulaire ? Tu souhaites partager tes attentes pour cet
+        annuaire, suggérer des fonctionnalités voire contribuer au développement de la version sous Django ?
+        Alors n'hésite pas à écrire à : <a
+            href="mailto:annuaire@xue.polytechnique.org">annuaire@xue.polytechnique.org</a>.
+    </p>
+
+    <p>Et pour te rendre sur le <strong>site d'X-UE</strong>, c'est à cette adresse que ça se passe : <a href="https://polytechnique-urgence-ecologique.simple.ink/">
+            https://polytechnique-urgence-ecologique.simple.ink/
+        </a></p>
+</div>
+{% endblock content %}

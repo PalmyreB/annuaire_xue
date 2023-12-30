@@ -1,0 +1,28 @@
+{% extends 'entrees/login.html' %}
+{% load i18n static viewflow %}
+
+{% block lockscreen-sidebar-header-title %}{% trans 'Sign up' %}{% endblock %}
+
+{% block lockscreen-sidebar-content %}
+  <vf-form>
+    <form class="vf-form" method="POST">
+      {% csrf_token %}
+      {% if form.layout %}
+        {% render form form.layout %}
+      {% elif view.layout %}
+        {% render form view.layout %}
+      {% else %}
+        {% render form %}
+      {% endif %}
+      <button type="submit" class="mdc-button mdc-button--raised vf-page-lockscreen__sidebar-content-action">
+        {% trans 'Sign up' %}
+      </button>
+      {% url 'login' as login_url %}
+      {% if login_url %}
+        <a href="{{ login_url }}" class="mdc-typography vf-page-lockscreen-reset-link">
+          {% trans 'Log in' %}
+        </a>
+      {% endif %}
+    </form>
+  </vf-form>
+{% endblock %}

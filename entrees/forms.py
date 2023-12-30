@@ -1,11 +1,10 @@
 from django import forms
-from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
+
 from viewflow.forms import FieldSet, Layout, Row
 
 from . import models
-
-User = get_user_model()
 
 
 class ReferentContactCreationForm(forms.ModelForm):
@@ -26,15 +25,27 @@ class ReferentContactCreationForm(forms.ModelForm):
         model = models.ReferentContact
         exclude = ("user",)
 
+    # layout = Layout(
+    #     "username",
+    #     Row("password1", "password2"),
+    #     Row("first_name", "last_name"),
+    #     "email",
+    #     Row("phone", "city", "promotion"),
+    # )
+
     layout = Layout(
         "username",
-        Row("password1", "password2"),
-        Row("first_name", "last_name"),
+        "password1",
+        "password2",
+        "first_name",
+        "last_name",
         "email",
-        Row("phone", "city", "promotion"),
+        "phone",
+        "city",
+        "promotion",
     )
 
-    def clean_username(self):  # check if username dos not exist before
+    def clean_username(self):  # check if username does not exist before
         try:
             User.objects.get(
                 username=self.cleaned_data["username"]
@@ -73,7 +84,7 @@ class ReferentContactCreationForm(forms.ModelForm):
         return new_user
 
 
-class RecommendedContactForm(forms.ModelForm):
+class RecommendedContactCreationForm(forms.ModelForm):
     has_approved = forms.BooleanField(
         label=_(
             "Je confirme que je m'engage à servir d'intermédiaire pour mettre en relation des personnes d'X-UE avec ce contact."
@@ -90,7 +101,11 @@ class RecommendedContactForm(forms.ModelForm):
         exclude = ("referent_contact",)
 
     layout = Layout(
-        FieldSet("Coordonnées personnelles", Row("first_name", "last_name"), "website"),
+        FieldSet(
+            "Coordonnées personnelles",
+            Row("first_name", "last_name"),
+            "website",
+        ),
         FieldSet(
             "Engagement",
             Row("structure", "function"),
@@ -102,5 +117,50 @@ class RecommendedContactForm(forms.ModelForm):
         FieldSet(
             "Confirmation",
             Row("has_approved", "has_informed"),
+        ),
+    )
+
+
+class RecommendedContactUpdateForm(forms.ModelForm):
+    class Meta:
+        model = models.RecommendedContact
+        exclude = ("referent_contact",)
+
+    layout = Layout(
+        FieldSet(
+            "Coordonnées personnelles",
+            Row("first_name", "last_name"),
+            "website",
+        ),
+        FieldSet(
+            "Engagement",
+            Row("structure", "function"),
+            "engagements",
+            "reasons_to_contact",
+            "fields_of_competence",
+            "other_fields_of_competence",
+        ),
+    )
+
+
+class RecommendedContactViewForm(forms.ModelForm):
+    class Meta:
+        model = models.RecommendedContact
+        fields = "__all__"
+
+    layout = Layout(
+        FieldSet(
+            "Coordonnées personnelles",
+            Row("first_name", "last_name"),
+            "website",
+            "referent_contact",
+        ),
+        FieldSet(
+            "Engagement",
+            Row("structure", "function"),
+            "engagements",
+            "reasons_to_contact",
+            "fields_of_competence",
+            "other_fields_of_competence",
         ),
     )

@@ -1,0 +1,47 @@
+{% extends 'registration/login.html' %}
+{% load i18n static viewflow %}
+
+{% block lockscreen-sidebar-header-title %}{% trans 'Log in' %}{% endblock %}
+{% block lockscreen-sidebar-header-subtitle %}{% trans 'Annuaire X-UE' %}{% endblock %}
+
+
+{% block lockscreen-sidebar-content %}
+  <vf-form>
+    <form class="vf-form" method="POST">
+      {% csrf_token %}
+      {% if form.layout %}
+        {% render form form.layout %}
+      {% elif view.layout %}
+        {% render form view.layout %}
+      {% else %}
+        {% render form %}
+      {% endif %}
+      <button type="submit" class="mdc-button mdc-button--raised vf-page-lockscreen__sidebar-content-action">
+        {% trans 'Log in' %}
+      </button>
+
+      {% url 'password_reset' as reset_url %}
+      {% if reset_url %}
+        <a href="{{ reset_url }}" class="mdc-typography vf-page-lockscreen-reset-link">
+          {% trans 'Reset password' %}
+        </a>
+      {% endif %}
+
+      {% url 'register' as register_url %}
+      {% if register_url %}
+        <a href="{{ register_url }}" class="mdc-typography vf-page-lockscreen-reset-link">
+          {% trans 'Sign up' %}
+        </a>
+      {% endif %}
+    </form>
+  </vf-form>
+{% endblock %}
+
+
+{% block lockscreen-content %}
+  <div class="vf-page-lockscreen__content-icon" style="background-color: #f1efed;">
+    {% block lockscreen-content-icon %}
+    <img src="{% static 'entrees/logoXUE.svg' %}" alt="Logo XUE" />
+    {% endblock %}
+  </div>
+{% endblock %}
