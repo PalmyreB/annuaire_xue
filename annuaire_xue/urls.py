@@ -37,7 +37,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/login/", entrees_views.LoginView.as_view()),
     path("accounts/register/", entrees_views.sign_up, name="register"),
-    path("accounts/", AuthViewset(with_profile_view=True).urls),
+    path("accounts/", AuthViewset(with_profile_view=False).urls),
     path("entrees/", include(("entrees.urls", "entrees"))),
     path("", site.urls),
 ]

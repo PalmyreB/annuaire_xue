@@ -1,7 +1,9 @@
 from django.contrib.auth import login
 from django.contrib.auth.models import Permission
 from django.contrib.auth.views import LoginView as BaseLoginView
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 from django.views.generic.edit import CreateView
 
 from entrees.forms import RecommendedContactCreationForm, ReferentContactCreationForm
@@ -24,9 +26,6 @@ class RecommendedContactCreationView(CreateView):
 
 
 def sign_up(request):
-    if request.method == "GET":
-        form = ReferentContactCreationForm()
-        return render(request, "entrees/register.html", {"form": form})
     if request.method == "POST":
         form = ReferentContactCreationForm(request.POST)
         if form.is_valid():
@@ -45,9 +44,12 @@ def sign_up(request):
             )
             user.user_permissions.add(*permissions)
             login(request, user)
-            return index(request)
+            return HttpResponseRedirect(reverse("index"))
         else:
             return render(request, "entrees/register.html", {"form": form})
+    else:  # if request.method == "GET":
+        form = ReferentContactCreationForm()
+        return render(request, "entrees/register.html", {"form": form})
 
 
 def index(request):

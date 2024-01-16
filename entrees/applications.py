@@ -34,10 +34,10 @@ class FieldsApplication(Application):
     app_name = "fields"
     viewsets = [
         # ReadonlyModelViewset(model=models.FieldOfCompetence, icon="book"),
-        # Add a viewset per field of competence
         viewsets.RecommendedContactWithFieldFilterViewset(),
-        *[
-            viewsets.RecommendedContactByFieldViewset(title=str(field), field=field)
-            for field in models.FieldOfCompetence.objects.all()
-        ],
+        # Add a viewset per field of competence
+        # *[
+        #     viewsets.RecommendedContactByFieldViewset(title=str(field), field=field)
+        #     for field in models.FieldOfCompetence.objects.all()
+        # ],
     ]
