@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "viewflow",
     "entrees",
+    "accounts",
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,7 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Redirection URL after login
+# Viewflow's default : "/accounts/profile/"
+LOGIN_REDIRECT_URL = "/"
