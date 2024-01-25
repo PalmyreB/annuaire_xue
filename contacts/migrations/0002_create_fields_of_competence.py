@@ -3,27 +3,24 @@ import json
 from django.db import migrations
 from django.utils.text import slugify
 
-from entrees import models
+from contacts import models
 
 
 def create_fields_of_competence(apps, schema_editor):
     """Populate database with fields of competence from file"""
     FieldOfCompetence = models.FieldOfCompetence
     with open(
-        "./entrees/migrations/migration_files/fields_of_competence.json",
+        "./contacts/migrations/migration_files/fields_of_competence.json",
         "r",
         encoding="utf8",
     ) as field_file:
         data = field_file.read()
     field_list = json.loads(data)
     for field_item in field_list:
-        field = {
-            "name": field_item["name"],
-            "slug": slugify(field_item["name"]).replace("&", "-et-").replace("/", "-"),
-        }
-        if "icon" in field_item:
-            field["icon"] = field_item["icon"]
-        FieldOfCompetence.objects.create(**field)
+        field_item["slug"] = (
+            slugify(field_item["name"]).replace("&", "-et-").replace("/", "-")
+        )
+        FieldOfCompetence.objects.create(**field_item)
 
 
 def delete_fields_of_competence(apps, schema_editor):
@@ -33,7 +30,7 @@ def delete_fields_of_competence(apps, schema_editor):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("entrees", "0001_initial"),
+        ("contacts", "0001_initial"),
     ]
 
     operations = [

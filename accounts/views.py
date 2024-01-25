@@ -5,12 +5,12 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from entrees import forms as entrees_forms
+from contacts import forms as contacts_forms
 
 
 def sign_up(request):
     if request.method == "POST":
-        form = entrees_forms.ReferentContactCreationForm(request.POST)
+        form = contacts_forms.ReferentContactCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             user.save()
@@ -31,7 +31,7 @@ def sign_up(request):
         else:
             return render(request, "accounts/register.html", {"form": form})
     else:  # if request.method == "GET":
-        form = entrees_forms.ReferentContactCreationForm()
+        form = contacts_forms.ReferentContactCreationForm()
         return render(request, "accounts/register.html", {"form": form})
 
 

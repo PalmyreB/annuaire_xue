@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 
-from entrees.models import FieldOfCompetence, RecommendedContact, ReferentContact
+from contacts.models import FieldOfCompetence, RecommendedContact, ReferentContact
 
 
 class ReferentContactInline(admin.StackedInline):

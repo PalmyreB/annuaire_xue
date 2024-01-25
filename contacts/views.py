@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView
 
-from entrees.forms import RecommendedContactCreationForm
-from entrees.models import RecommendedContact, ReferentContact
+from contacts.forms import RecommendedContactCreationForm
+from contacts.models import RecommendedContact, ReferentContact
 
 
 class RecommendedContactCreationView(CreateView):
@@ -21,4 +21,4 @@ class RecommendedContactCreationView(CreateView):
 
 
 def index(request):
-    return render(request, "entrees/home.html")
+    return render(request, "contacts/home.html")

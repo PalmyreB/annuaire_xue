@@ -117,9 +117,13 @@ Avec l'environnement virtuel actuel, lancer la commande suivante depuis la racin
 python manage.py runserver
 ```
 
-Se rendre à l'adresse <http://127.0.0.1:8000/entrees/>.
+Se rendre à l'adresse <http://127.0.0.1:8000/>.
 
-La connexion se fait sur la page <http://127.0.0.1:8000/admin/>.
+La connexion se fait sur la page <http://127.0.0.1:8000/accounts/login/>.
+
+L'interface d'administration se trouve à l'adresse <http://127.0.0.1:8000/admin/>.
+
+> ⚠️ Attention, le profil de super-utilisateur créé à l'initialisation du projet n'est pas associé à un contact référent par défaut, et ne permet donc pas d'accéder à toutes les pages. Lors du premier lancement, s'inscrire sur <127.0.0.1:8000/accounts/register/>. Pour pouvoir utiliser le compte de super-utilisateur comme un autre compte, il est possible de le lier à un contact référent.
 
 ## Contribuer au projet
 
@@ -132,4 +136,3 @@ Vous pouvez :
 
 - [Documentation Django](https://docs.djangoproject.com/en/4.1/)
 - [Django Viewflow](https://github.com/viewflow/viewflow/)
-- [~~Django Material~~](https://github.com/viewflow/django-material/) (bibliothèque utilisée avant qu'elle ne soit remplacée par Django Viewflow)

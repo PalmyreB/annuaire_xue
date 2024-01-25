@@ -36,6 +36,10 @@ class FieldsApplication(Application):
         # ReadonlyModelViewset(model=models.FieldOfCompetence, icon="book"),
         viewsets.RecommendedContactWithFieldFilterViewset(),
         # Add a viewset per field of competence
+        # TODO: Fix the bug caused by next lines.
+        #  It seems that applications are initialized before models.
+        #  Hence, it is not possible to refer to objects of a model at initialization.
+        #  However, uncommenting these lines when the application is running works.
         # *[
         #     viewsets.RecommendedContactByFieldViewset(title=str(field), field=field)
         #     for field in models.FieldOfCompetence.objects.all()

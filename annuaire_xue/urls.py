@@ -19,7 +19,7 @@ from django.urls import include, path
 from viewflow.contrib.auth import AuthViewset
 from viewflow.urls import Site
 
-from entrees import applications as entrees_applications
+from contacts import applications as contacts_applications
 from accounts import views as accounts_views
 
 site = Site(
@@ -27,9 +27,9 @@ site = Site(
     primary_color="#003e5c",
     secondary_color="#d52b1e",
     viewsets=[
-        entrees_applications.HomeApplication(),
-        entrees_applications.PeopleApplication(),
-        entrees_applications.FieldsApplication(),
+        contacts_applications.HomeApplication(),
+        contacts_applications.PeopleApplication(),
+        contacts_applications.FieldsApplication(),
     ],
 )
 
@@ -38,6 +38,6 @@ urlpatterns = [
     path("accounts/login/", accounts_views.LoginView.as_view()),
     path("accounts/register/", accounts_views.sign_up, name="register"),
     path("accounts/", AuthViewset(with_profile_view=True).urls),
-    path("entrees/", include(("entrees.urls", "entrees"))),
+    path("contacts/", include(("contacts.urls", "contacts"))),
     path("", site.urls),
 ]

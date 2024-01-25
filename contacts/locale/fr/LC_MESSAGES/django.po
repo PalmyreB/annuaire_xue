@@ -22,6 +22,9 @@ msgstr ""
 msgid "Filter"
 msgstr "Filtrer"
 
+msgid "Connection"
+msgstr "Connexion"
+
 msgid "Log in again"
 msgstr "Se connecter à nouveau"
 

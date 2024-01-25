@@ -132,7 +132,7 @@ class Migration(migrations.Migration):
                     "fields_of_competence",
                     models.ManyToManyField(
                         blank=True,
-                        to="entrees.fieldofcompetence",
+                        to="contacts.fieldofcompetence",
                         verbose_name="domaines de compétence",
                     ),
                 ),
@@ -140,7 +140,7 @@ class Migration(migrations.Migration):
                     "referent_contact",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.PROTECT,
-                        to="entrees.referentcontact",
+                        to="contacts.referentcontact",
                         verbose_name="contact référent",
                     ),
                 ),
