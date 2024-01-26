@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext as _
@@ -6,6 +7,9 @@ from django.utils.translation import gettext as _
 class FieldOfCompetence(models.Model):
     name = models.CharField(_("nom"), max_length=200)
     slug = models.SlugField(_("code"), null=False, unique=True)
+    icon = models.CharField(
+        _("icône"), max_length=200, help_text=_("Nom de l'icône Material")
+    )
 
     class Meta:
         verbose_name = _("domaine de compétence")
@@ -16,9 +20,7 @@ class FieldOfCompetence(models.Model):
 
 
 class ReferentContact(models.Model):
-    first_name = models.CharField(_("prénom"), max_length=200)
-    last_name = models.CharField(_("nom de famille"), max_length=200)
-    mail = models.EmailField(_("adresse email"), max_length=200)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone = models.CharField(
         _("numéro de téléphone"),
         max_length=200,
@@ -28,20 +30,19 @@ class ReferentContact(models.Model):
     city = models.CharField(_("ville"), max_length=200, blank=True)
     promotion = models.CharField(
         _("promotion"),
-        max_length=200,
+        max_length=10,
         blank=True,
         help_text=_(
             "Au format X04 pour le cycle ingénieur polytechnicien, D98 pour le doctorat de Polytechnique, M09 pour le master, B22 pour le bachelor"
         ),
     )
-    registration_date = models.DateTimeField(_("date d'inscription"))
 
     class Meta:
         verbose_name = _("contact référent")
         verbose_name_plural = _("contacts référents")
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.user.first_name} {self.user.last_name}"
 
 
 class RecommendedContact(models.Model):

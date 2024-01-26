@@ -83,7 +83,7 @@ Seules les étapes 4. et 6. sont modifiées de la façon suivante :
 
 2. Lancer PyCharm et créer un nouveau projet depuis un VCS
 
-3. Choisir Git et donner comme URL : https://github.com/PalmyreB/annuaire_xue.git
+3. Choisir Git et donner comme URL : <https://github.com/PalmyreB/annuaire_xue.git>
 
 4. Créer un venv dans PyCharm (Ctrl+Alt+S si le logiciel ne le propose pas puis aller dans Interpréteur) en donnant le chemin vers votre python
 
@@ -108,6 +108,7 @@ Seules les étapes 4. et 6. sont modifiées de la façon suivante :
    ```sh
    python manage.py createsuperuser
    ```
+
 ## Lancer le projet
 
 Avec l'environnement virtuel actuel, lancer la commande suivante depuis la racine
@@ -116,9 +117,13 @@ Avec l'environnement virtuel actuel, lancer la commande suivante depuis la racin
 python manage.py runserver
 ```
 
-Se rendre à l'adresse <http://127.0.0.1:8000/entrees/>.
+Se rendre à l'adresse <http://127.0.0.1:8000/>.
 
-La connexion se fait sur la page <http://127.0.0.1:8000/admin/>.
+La connexion se fait sur la page <http://127.0.0.1:8000/accounts/login/>.
+
+L'interface d'administration se trouve à l'adresse <http://127.0.0.1:8000/admin/>.
+
+> ⚠️ Attention, le profil de super-utilisateur créé à l'initialisation du projet n'est pas associé à un contact référent par défaut, et ne permet donc pas d'accéder à toutes les pages. Lors du premier lancement, s'inscrire sur <127.0.0.1:8000/accounts/register/>. Pour pouvoir utiliser le compte de super-utilisateur comme un autre compte, il est possible de le lier à un contact référent.
 
 ## Contribuer au projet
 
@@ -130,4 +135,4 @@ Vous pouvez :
 ## Ressources
 
 - [Documentation Django](https://docs.djangoproject.com/en/4.1/)
-- [Django Material](https://github.com/viewflow/django-material/)
+- [Django Viewflow](https://github.com/viewflow/viewflow/)
