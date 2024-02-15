@@ -6,6 +6,7 @@ Ce dépôt contient un annuaire qui permet de recommander des contacts intéress
 
 ## Prérequis
 
+- [Git](https://git-scm.com/downloads)
 - [Python](https://www.python.org/downloads/)
 - [Django](https://docs.djangoproject.com/en/4.1/topics/install/)
 
@@ -13,7 +14,7 @@ Ce dépôt contient un annuaire qui permet de recommander des contacts intéress
 
 ### Pour Windows
 
-1. Cloner le projet
+1. Cloner le projet en lançant cette commande dans la console (cmd ou Git Bash)
 
    ```sh
    git clone https://github.com/PalmyreB/annuaire_xue.git
@@ -28,12 +29,15 @@ Ce dépôt contient un annuaire qui permet de recommander des contacts intéress
 3. Créer un environnement virtuel
 
    ```sh
-   python -m venv venv
+   py -m venv venv
    ```
 
 4. Activer l'environnement virtuel
 
    ```sh
+   # Dans l'invite de commandes (cmd) :
+   venv\Scripts\activate.bat
+   # Dans Git Bash :
    source venv/Scripts/activate
    ```
 
@@ -46,19 +50,20 @@ Ce dépôt contient un annuaire qui permet de recommander des contacts intéress
 6. Créer un fichier nommé `.env` avec la clé secrète communiquée par un administrateur (à défaut, pour des tests locaux, une clé arbitraire – ne pas mettre les accolades dans cette commande)
 
    ```sh
-   echo -e "SECRET_KEY={votre clé secrète}\nSECRET_KEY_FALLBACKS=" > .env
+   echo SECRET_KEY={votre clé secrète} > .env
+   echo SECRET_KEY_FALLBACKS= >> .env
    ```
 
 7. Lancer les migrations
 
    ```sh
-   python manage.py migrate
+   py manage.py migrate
    ```
 
 8. Créer un profil de super-utilisateur
 
    ```sh
-   python manage.py createsuperuser
+   py manage.py createsuperuser
    ```
 
 ### Pour Linux
@@ -114,7 +119,7 @@ Seules les étapes 4. et 6. sont modifiées de la façon suivante :
 Avec l'environnement virtuel actuel, lancer la commande suivante depuis la racine
 
 ```sh
-python manage.py runserver
+py manage.py runserver
 ```
 
 Se rendre à l'adresse <http://127.0.0.1:8000/>.
