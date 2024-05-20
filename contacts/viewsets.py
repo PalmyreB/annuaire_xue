@@ -78,6 +78,7 @@ class RecommendedContactByFieldViewset(ReadonlyModelViewset):
 
 
 class RecommendedContactAddedByUserViewset(ModelViewset):
+    app_name = "recommended_contact_added_by_user"
     title = "Mes recommandations"
     icon = "people"
     model = models.RecommendedContact
