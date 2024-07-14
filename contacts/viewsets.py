@@ -11,7 +11,7 @@ class HomeViewset(Viewset):
 class ReferentContactViewset(ModelViewset):
     icon = "people"
     model = models.ReferentContact
-    list_filter_fields = ["user__first_name", "user__last_name"]
+    list_filter_fields = ["user__username", "user__first_name", "user__last_name"]
     create_form_class = forms.ReferentContactCreationForm
 
 
@@ -103,7 +103,12 @@ class RecommendedContactAddedByUserViewset(ModelViewset):
         """
         Filter contacts created by connected user.
         """
-        referent_contact = models.ReferentContact.objects.get(user=request.user)
+        referent_contact, _ = models.ReferentContact.objects.get_or_create(
+            user=request.user
+        )
+        if not request.user.first_name:
+            request.user.first_name = request.user.username
+            request.user.save()
         return models.RecommendedContact.objects.filter(
             referent_contact=referent_contact
-        )
+        ).order_by("first_name")
